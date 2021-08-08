@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>To do List</title>
+</head>
+<body>
+    <div class="head">
+        <h1><%= viewDay  %></h1>
+        <h2><%= viewlistName %> List</h2>
+    </div>
+    <div class="list">
+        <%for(let i=0;i<viewList.length;i++){%>
+            <form action="/delete" method="post">
+                <div class="item">
+                    <input type="checkbox" name="checkbox" value="<%=viewList[i] %>"onchange="this.form.submit()">
+                    <p><%= viewList[i] %> </p>
+                    <input type="hidden" name="listsource" value="<%=viewlistName%>">
+                </div>    
+            </form>
+        <%}%>
+    </div>
+    <%if(viewlistName==="Default"){%>
+        <form action="/" method="POST" class="item-add">
+    <%}else{%>
+        <form action="/<%= viewlistName %> " method="POST" class="item-add">
+    <%}%>
+        <input type="text" name="newItem" placeholder="Enter new action item" required>    
+        <button type="submit">+</button>  
+    </form>
+</body>
+</html>
